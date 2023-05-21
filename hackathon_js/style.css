@@ -15,7 +15,7 @@
     display: flex;
     justify-self: center;
     align-self: center;
-    transition: width 0.9s;
+    transition: width 1s;
     transition-timing-function: ease;
 }
 
@@ -25,12 +25,12 @@
 }
 
 #circle2{
-    width: 30%;
+    width: 100%;
     height: width;
 }
 
 #circle3{
-    width: 30%;
+    width: 100%;
     height: width;
 }
 
