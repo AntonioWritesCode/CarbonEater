@@ -1,0 +1,105 @@
+Sub ETABS VBA()
+
+'create instance of currently opened program
+    Dim etabsObject As cOAPI
+    Set etabsObject = GetObject(, "CSI.ETABS.API.ETABSObject")
+    
+'Create instance of the model
+    Dim SapModel As cSapModel
+    Set SapModel = etabsObject.SapModel
+
+'define return variable
+    Dim ret As Integer
+    Dim x As Double, y As Double, z As Double
+    Dim Name As String
+    Dim MyName As String
+    Dim i As Integer, n As Integer
+    n = WorksheetFunction.Count(Range("C5:C1000"))
+    
+
+
+For i = 1 To n
+    
+
+
+'add point object to model
+
+    A = Worksheets("ETABS Coordinates").Cells(4 + i, 3)
+    B = Worksheets("ETABS Coordinates").Cells(4 + i, 4)
+    C = Worksheets("ETABS Coordinates").Cells(4 + i, 5)
+
+    x = Worksheets("ETABS Coordinates").Cells(4 + i, 6)
+    y = Worksheets("ETABS Coordinates").Cells(4 + i, 7)
+    z = Worksheets("ETABS Coordinates").Cells(4 + i, 8)
+    
+    'ret = SapModel.PointObj.AddCartesian(x, y, z, Name)
+
+    D = Worksheets("ETABS Coordinates").Cells(4 + i, 9)
+    e = Worksheets("ETABS Coordinates").Cells(4 + i, 10)
+    f = Worksheets("ETABS Coordinates").Cells(4 + i, 11)
+    
+    'ret = SapModel.PointObj.AddCartesian(d, e, f, Name)
+
+    'add line element
+    If A = x And B = y Then
+
+        ret = SapModel.FrameObj.AddByCoord(x, y, z, A, B, C, Name, "A-LatCol")
+    Else
+        ret = SapModel.FrameObj.AddByCoord(x, y, z, A, B, C, Name, "A-LatBm")
+    End If
+    
+    
+Next i
+
+
+Dim xx() As Double
+Dim yy() As Double
+Dim zz() As Double
+
+ReDim xx(5)
+ReDim yy(5)
+ReDim zz(5)
+   
+
+n = WorksheetFunction.Count(Range("J5:J1000"))
+ For i = 1 To n
+   'xx(0) = 0:   yy(0) = 0
+   'xx(1) = 96 / 2 * 12: yy(1) = 0
+   'xx(2) = 96 * 12: yy(2) = 0
+   'xx(3) = 96 * 12: yy(3) = 72 * 12
+   'xx(4) = 0:   yy(4) = 72 * 12
+   'xx(5) = 0:    yy(5) = 72 * 12 / 2
+   
+    xx(0) = WorksheetFunction.Min("C5:C1000"):   yy(0) = WorksheetFunction.Min("D5:D1000") * 12
+    xx(1) = WorksheetFunction.Max("C5:C1000") / 2 * 12: yy(1) = WorksheetFunction.Min("D5:D1000") * 12
+    xx(2) = WorksheetFunction.Max("C5:C1000") * 12: yy(2) = WorksheetFunction.Min("D5:D1000") * 12
+    xx(3) = WorksheetFunction.Max("C5:C1000"): yy(3) = WorksheetFunction.Max("D5:D1000") * 12
+    xx(4) = WorksheetFunction.Min("C5:C1000"):   yy(4) = WorksheetFunction.Max("D5:D1000") * 12
+    xx(5) = WorksheetFunction.Min("C5:C1000"):    yy(5) = WorksheetFunction.Max("D5:D1000") * 12 / 2
+   
+   zz(0) = Worksheets("ETABS Coordinates").Cells(4 + i, 10)
+   zz(1) = Worksheets("ETABS Coordinates").Cells(4 + i, 10)
+   zz(2) = Worksheets("ETABS Coordinates").Cells(4 + i, 10)
+   zz(3) = Worksheets("ETABS Coordinates").Cells(4 + i, 10)
+   zz(4) = Worksheets("ETABS Coordinates").Cells(4 + i, 10)
+   zz(5) = Worksheets("ETABS Coordinates").Cells(4 + i, 10)
+   ret = SapModel.AreaObj.AddByCoord(6, xx, yy, zz, Name)
+   ret = SapModel.AreaObj.SetProperty("Deck1", "None")
+   ret = SapModel.AreaObj.SetLoadUniform("ALL", "LIVE", 100 / 144, 2)
+   
+   
+    
+Next i
+
+ret = SapModel.View.RefreshView(0, False)
+
+System.IO.Directory.CreateDirectory ("c:\CSI_API_temp")
+ret = SapModel.File.Save("C:\CSI_API_temp\example.edb")
+ret = SapModel.Analyze.RunAnalysis
+
+ret = SapModel.DesignSteel.StartDesign()
+
+   
+   
+
+End Sub
