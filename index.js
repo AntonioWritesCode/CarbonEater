@@ -1,5 +1,5 @@
 const psfData = [50, 60, 70, 80, 90, 100];
-const weights = [136944, 144720, 152568, 160584, 165024, 168480];
+const weights = [136944, 144720, 152568, 160584, 165024, 171504];
 const carbonData = [];
 const costData = [];
 
