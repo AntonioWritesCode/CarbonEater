@@ -15,6 +15,8 @@
     display: flex;
     justify-self: center;
     align-self: center;
+    transition: width 0.9s;
+    transition-timing-function: ease;
 }
 
 #circle1{
@@ -60,7 +62,7 @@
     width: 10%;
     height: 10%;
     position: fixed;
-    top: 30%
+    top: 30%;
 }
 
 #upButton{
@@ -73,6 +75,7 @@
 
 .info{
     text-align: center;
+    color: aliceblue;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -98,4 +101,8 @@
 h1{
     color: aliceblue;
     font-family: 'Instrument Sans', sans-serif;
+}
+
+body {
+    background-color: lightskyblue;
 }
