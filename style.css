@@ -1,0 +1,108 @@
+.circle{
+    height: 60%;
+    width: 98%;
+    position: fixed;
+    left: 1%;
+    top:40%;
+
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 100%;
+}
+
+
+.circle > *{
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    transition: width 1s;
+    transition-timing-function: ease;
+}
+
+#circle1{
+    width: 100%;
+    height: width; 
+}
+
+#circle2{
+    width: 100%;
+    height: width;
+}
+
+#circle3{
+    width: 100%;
+    height: width;
+}
+
+.text {
+    height: 60%;
+    width: 98%;
+    position: fixed;
+    left: 1%;
+    top:40%;
+
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    grid-template-rows: 100%;
+}
+
+.text > *{
+    max-width: 100%;
+
+    display: flex;
+    justify-self: center;
+    align-self: center;
+
+    color:azure;
+    font-size: 300%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.buttons > *{
+    width: 10%;
+    height: 10%;
+    position: fixed;
+    top: 30%;
+}
+
+#upButton{
+    left: 40%;
+}
+
+#downButton{
+    left: 50%;
+}
+
+.info{
+    text-align: center;
+    color: aliceblue;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#titleText{
+    font-size: 300%;
+    top: 45%;
+}
+
+#instructions{
+    font-size: 200%;
+    top: 30%;
+}
+
+#elementId{
+    background-color: lightblue;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+h1{
+    color: aliceblue;
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+body {
+    background-color: lightskyblue;
+}
