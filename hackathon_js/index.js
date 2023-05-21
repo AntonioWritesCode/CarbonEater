@@ -4,17 +4,15 @@ const carbonData = [];
 const costData = [];
 
 for(i = 0; i < weights.length; i++){
-    var carbonAddOn = weights[i] * 1/2000 * 5500;
+    var carbonAddOn = weights[i] * 1/2.20462 * 2.85;
     carbonAddOn = carbonAddOn/1000;
     carbonAddOn = Math.round(carbonAddOn);
     carbonData.push(carbonAddOn);
-    var costAddOn = weights[i] * 1/2.20462 * 2.85;
+    var costAddOn = weights[i] * 1/2000 * 5500;
     costAddOn = costAddOn/1000;
     costAddOn = Math.round(costAddOn);
     costData.push(costAddOn);
 }
-
-
 
 const maxPSF = psfData[psfData.length-1];
 const maxCO2 = carbonData[carbonData.length-1];
@@ -51,6 +49,13 @@ upButton.onclick = function(){
 
     document.getElementById("circle1").style.width = tempText;
 
+    scaleNumber = 100 + scaleNumber * 200/100;
+    tempText = scaleNumber.toString() + "%";
+
+    document.getElementById("text1").style.fontSize = tempText;
+    document.getElementById("text2").style.fontSize = tempText;
+    document.getElementById("text3").style.fontSize = tempText;
+
     
     var index;
     for(i = 0; i < psfData.length; i++){
@@ -63,7 +68,7 @@ upButton.onclick = function(){
     var carbonText = carbon.toString();
     var costText = cost.toString();
 
-    document.getElementById("text2").innerHTML= "CO2: " + carbonText + "k kg";
+    document.getElementById("text2").innerHTML= "CO2: " + carbonText + " mt";
     document.getElementById("text3").innerHTML= "$" + costText + "k";
 
     var carbonScale = ((carbon - minCO2) * 100)/(maxCO2 - minCO2);
@@ -105,6 +110,13 @@ downButton.onclick = function(){
 
     document.getElementById("circle1").style.width = tempText;
 
+    scaleNumber = 100 + scaleNumber * 200/100;
+    tempText = scaleNumber.toString() + "%";
+
+    document.getElementById("text1").style.fontSize = tempText;
+    document.getElementById("text2").style.fontSize = tempText;
+    document.getElementById("text3").style.fontSize = tempText;
+
     var index;
     for(i = 0; i < psfData.length; i++){
         if(currentNumber == psfData[i]){
@@ -117,7 +129,7 @@ downButton.onclick = function(){
     var costText = cost.toString();
 
 
-    document.getElementById("text2").innerHTML= "CO2: " + carbonText + "k kg";
+    document.getElementById("text2").innerHTML= "CO2: " + carbonText + " mt";
     document.getElementById("text3").innerHTML= "$" + costText + "k";
 
     var carbonScale = ((carbon - minCO2) * 100)/(maxCO2 - minCO2);
